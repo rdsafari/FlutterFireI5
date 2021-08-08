@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "524967406090",
+    "project_id": "chikacarwash",
+    "storage_bucket": "chikacarwash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524967406090:android:a8cf0d9965f0b3904a8df3",
+        "android_client_info": {
+          "package_name": "com.example.ccw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524967406090-thf78rqg12h82uuj5744pc7kog3eijqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmpTk24F6bwTRb8rVtfTu-4nP9D4gqwac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524967406090-thf78rqg12h82uuj5744pc7kog3eijqb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "524967406090-6ae3it1qnhm3es1anrnkqgai6uqeb4ia.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.drcarwash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

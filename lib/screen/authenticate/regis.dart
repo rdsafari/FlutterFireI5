@@ -1,0 +1,96 @@
+import 'package:ccw/screen/authenticate/sign_in.dart';
+import 'package:ccw/services/auth.dart';
+import 'package:ccw/shared/constant.dart';
+import 'package:ccw/shared/loading.dart';
+import 'package:flutter/material.dart';
+
+class Register extends StatefulWidget {
+  final Function toggle;
+  Register({this.toggle});
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final AuthService _authenticate = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
+  String email = '';
+  String pass = '';
+  String err = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return loading
+        ? Loading()
+        : Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+                backgroundColor: Colors.black45,
+                elevation: 0.0,
+                title: Text('Sign Up CCW'),
+                actions: [
+                  FlatButton.icon(
+                      onPressed: () {
+                        widget.toggle();
+                      },
+                      icon: Icon(Icons.account_box),
+                      label: Text('Sign In'))
+                ]),
+            body: Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    TextFormField(
+                      decoration: textBoxDecor.copyWith(hintText: 'Email'),
+                      validator: (val) => val.isEmpty ? 'Enter an Email' : null,
+                      onChanged: (val) {
+                        setState(() => email = val);
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                        decoration: textBoxDecor.copyWith(hintText: 'Password'),
+                        validator: (val) =>
+                            val.length < 1 ? 'Password to short' : null,
+                        obscureText: true,
+                        onChanged: (val) {
+                          setState(() => pass = val);
+                        }),
+                    SizedBox(height: 20),
+                    RaisedButton(
+                      color: Colors.blueGrey[700],
+                      child: Text(
+                        'Register',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          setState(() => loading = true);
+                          dynamic result = await _authenticate
+                              .registerEmailToFirebase(email, pass);
+                          if (result == null) {
+                            setState(() {
+                              err = 'Please Enter Email and Password';
+                              loading = false;
+                            });
+                          } else {}
+                        }
+                      },
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      err,
+                      style: TextStyle(color: Colors.red, fontSize: 14),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+  }
+}
